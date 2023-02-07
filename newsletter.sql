@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 03, 2023 at 10:50 AM
+-- Generation Time: Feb 07, 2023 at 05:59 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,13 +24,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `origins`
+-- Table structure for table `origines`
 --
 
 CREATE TABLE `origines` (
   `id` int NOT NULL,
-  `origine_label` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `origine_label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `origines`
+--
+
+INSERT INTO `origines` (`id`, `origine_label`) VALUES
+(2, 'Un ami m’en a parlé'),
+(3, 'Recherche sur internet'),
+(4, 'Publicité dans un magazine');
 
 -- --------------------------------------------------------
 
@@ -44,7 +53,7 @@ CREATE TABLE `subscribers` (
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `origine_id` int NOT NULL
+  `origine_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -52,7 +61,7 @@ CREATE TABLE `subscribers` (
 --
 
 --
--- Indexes for table `origins`
+-- Indexes for table `origines`
 --
 ALTER TABLE `origines`
   ADD PRIMARY KEY (`id`);
@@ -62,33 +71,23 @@ ALTER TABLE `origines`
 --
 ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `origine_id` (`origine_id`);
+  ADD KEY `subscribers_ibfk_1` (`origine_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `origins`
+-- AUTO_INCREMENT for table `origines`
 --
 ALTER TABLE `origines`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `subscribers`
---
-ALTER TABLE `subscribers`
-  ADD CONSTRAINT `subscribers_ibfk_1` FOREIGN KEY (`origine_id`) REFERENCES `origines` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,6 +11,7 @@ $email = '';
 $firstname = '';
 $lastname = '';
 
+
 // Si le formulaire a été soumis...
 if (!empty($_POST)) {
 
@@ -19,8 +20,14 @@ if (!empty($_POST)) {
     $firstname = trim($_POST['firstname']);
     $lastname= trim($_POST['lastname']);
 
+
     // On récupère l'origine
     $origineSelectionnee = $_POST['origine'];
+   
+    
+    // $interestSelectionnee = $_POST[ $interest['interest_label']];
+
+    
 
     // Validation 
     if (!$email) {
@@ -45,11 +52,12 @@ if (!empty($_POST)) {
         if($mailexist > 0) {
           $errors['email']=" adresse mail existe déjà";
         }
-}else{
+    }else{
     $errors['email']=" adresse mail n'est pas valide ";
-}
+    }
+    }
 
-}
+
 
     
 
@@ -60,6 +68,7 @@ if (!empty($_POST)) {
     if (!$lastname) {
         $errors['lastname'] = "Merci d'indiquer un nom";
     }
+  
 
     // Si tout est OK (pas d'erreur)
     if (empty($errors)) {
@@ -78,6 +87,8 @@ if (!empty($_POST)) {
 
 // Sélection de la liste des origines
 $origines = getAllOrigins();
+
+
 
 // Inclusion du template
 include 'index.phtml';

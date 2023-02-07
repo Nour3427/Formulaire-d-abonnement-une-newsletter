@@ -27,6 +27,9 @@ function getAllOrigins()
 
     return $query->fetchAll();
 }
+
+
+
     
 
 /**
