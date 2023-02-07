@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `origins`
 --
 
-CREATE TABLE `origins` (
+CREATE TABLE `origines` (
   `id` int NOT NULL,
-  `origin_label` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `origine_label` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -44,7 +44,7 @@ CREATE TABLE `subscribers` (
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `origin_id` int NOT NULL
+  `origine_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `subscribers` (
 --
 -- Indexes for table `origins`
 --
-ALTER TABLE `origins`
+ALTER TABLE `origines`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -62,7 +62,7 @@ ALTER TABLE `origins`
 --
 ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `origin_id` (`origin_id`);
+  ADD KEY `origine_id` (`origine_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -71,7 +71,7 @@ ALTER TABLE `subscribers`
 --
 -- AUTO_INCREMENT for table `origins`
 --
-ALTER TABLE `origins`
+ALTER TABLE `origines`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -88,7 +88,7 @@ ALTER TABLE `subscribers`
 -- Constraints for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  ADD CONSTRAINT `subscribers_ibfk_1` FOREIGN KEY (`origin_id`) REFERENCES `origins` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `subscribers_ibfk_1` FOREIGN KEY (`origine_id`) REFERENCES `origines` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
