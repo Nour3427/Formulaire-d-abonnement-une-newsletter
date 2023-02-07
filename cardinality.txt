@@ -1,0 +1,3 @@
+
+
+la relation entre la table des abonnés et des origines est une relation un à plusieurs  ,Cela signifie que chaque abonné peut être associé à un seul origine, mais une origine peut être associée à plusieurs abonnés.Donc, la table des abonnés a une clé étrangère(origine_id) qui réfère à la table des origines(id), ce qui permet d'identifier l'origine pour chaque abonnée.
