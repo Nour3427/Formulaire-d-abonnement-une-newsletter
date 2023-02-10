@@ -1,8 +1,10 @@
 <?php
 
 require 'config.php';
+require 'functions.php';
 
 $filename = $argv[1];
+
 
 /**
  * On vérifie que le fichier existe bien. S'il n'existe pas on affiche simplement un message d'erreur
@@ -53,20 +55,22 @@ while ($row = fgetcsv($file)) {
      * - on remplace la virgule par un point
      * - on convertit la chaîne de caractères en nombre
      */
-
-    
     $firstname =ucwords(strtolower($firstname), " -");
     $lastname =ucwords(strtolower($lastname), " -");
     $email =strtolower($email);
     $email=str_replace(" ","", $email);
 
+    if(mailExists($email)==false){
+   $pdoStatement->execute([$firstname, $lastname, $email, $newDate]);
+     }
+
     /**
      * On enregistre ensuite le produit dans la base de données en exécutant la requête préparée plus haut
      */
-    $pdoStatement->execute([$firstname, $lastname, $email, $newDate]);
 }
 
 echo 'Import terminé!';
+
 
 
 ?>
