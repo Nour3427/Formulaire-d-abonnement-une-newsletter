@@ -4,6 +4,7 @@ require 'config.php';
 require 'functions.php';
 
 $filename = $argv[1];
+$i=0;
 
 
 /**
@@ -62,13 +63,20 @@ while ($row = fgetcsv($file)) {
 
     if(mailExists($email)==false){
    $pdoStatement->execute([$firstname, $lastname, $email, $newDate]);
+   $i+=1;
      }
+     else{
+        echo "Cette adresse $email existe déjà.\n";
+
+     }
+
 
     /**
      * On enregistre ensuite le produit dans la base de données en exécutant la requête préparée plus haut
      */
 }
 
+echo $i." emails insérés dans la base de données .\n";
 echo 'Import terminé!';
 
 

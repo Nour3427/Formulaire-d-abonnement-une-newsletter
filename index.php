@@ -55,8 +55,7 @@ if (!empty($_POST)) {
     if (!$interest) {
         $errors['interest'] = "Merci de cocher au moins un centre d'interêt";
     }
-
-
+ 
     // Si tout est OK (pas d'erreur)
     if (empty($errors)) {
 
@@ -69,11 +68,7 @@ if (!empty($_POST)) {
         
         // Message de succès
         $success  = 'Merci de votre inscription';
-    //     header('Location: index.php');
-    //     exit;
-    // }
-
-    $_SESSION['message'] = $success;
+        $_SESSION['message'] = $success;
         // Le formulaire a été soumis
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit();
