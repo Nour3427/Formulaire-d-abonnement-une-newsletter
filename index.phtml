@@ -73,10 +73,10 @@
                     <label for="checkbox" >Quels sont vos centres d'intérêt?</label><br><br>
                     
                     <?php foreach ($interests as $interest) : ?>
-                <input type="checkbox"  name="interest[]" value="<?= $interest['id'];?> "  <?php if (isset($_POST['interest']) && in_array($interest['id'], $_POST['interest'])) {
+                <input type="checkbox" id="interest-<?= $interest['id'];?>" name="interest[]" value="<?= $interest['id'];?> "  <?php if (isset($_POST['interest']) && in_array($interest['id'], $_POST['interest'])) {
     echo "checked";
   } ?>>
-                <label for=<?= $interest['id'];?>><?= $interest['interest_label']; ?></label><br>
+                <label for="interest-<?= $interest['id'];?>"><?= $interest['interest_label']; ?></label><br>
                 <?php endforeach;?>
                 
                 <?php if (isset($errors['interest'])) : ?>
