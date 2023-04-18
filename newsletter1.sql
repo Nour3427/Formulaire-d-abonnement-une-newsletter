@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 13, 2023 at 01:29 PM
+-- Generation Time: Apr 18, 2023 at 08:59 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -53,14 +53,14 @@ INSERT INTO `interests` (`id`, `interest_label`) VALUES
 
 CREATE TABLE `origines` (
   `id` int NOT NULL,
-  `origine_label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `origineLabel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `origines`
 --
 
-INSERT INTO `origines` (`id`, `origine_label`) VALUES
+INSERT INTO `origines` (`id`, `origineLabel`) VALUES
 (2, 'Un ami m’en a parlé'),
 (3, 'Recherche sur internet'),
 (4, 'Publicité dans un magazine');
@@ -80,6 +80,19 @@ CREATE TABLE `subscribers` (
   `origine_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `created`, `email`, `firstname`, `lastname`, `origine_id`) VALUES
+(7, '2023-02-13', 'alfred.dupont@gmail.com', 'Alfred', 'Dupont', NULL),
+(8, '2023-02-13', 'b.lav@hotmail.fr', 'Bertrand', 'Lavoisier', NULL),
+(9, '2023-02-13', 'sarahlamine@gmail.com', 'Sarah', 'Lamine', NULL),
+(10, '2023-02-13', 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL),
+(11, '2023-02-14', 'nourelyakine.moumene@gmail.com', 'Nour', 'Ferraoun', 3),
+(12, '2023-03-26', 'ferraoun.nour@gmail.com', 'yasmine', 'bent', 3),
+(16, '2023-04-18', 'azertypassepartout@gmail.com', 'nour', 'qwertt', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +103,19 @@ CREATE TABLE `subs_interest` (
   `subs_id` int NOT NULL,
   `interest_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subs_interest`
+--
+
+INSERT INTO `subs_interest` (`subs_id`, `interest_id`) VALUES
+(11, 6),
+(11, 7),
+(12, 4),
+(12, 5),
+(12, 3),
+(16, 6),
+(16, 5);
 
 --
 -- Indexes for dumped tables
@@ -142,7 +168,7 @@ ALTER TABLE `origines`
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

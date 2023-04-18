@@ -1,10 +1,14 @@
 <?php
+use App\Model\SubscriberModel;
 
 require 'config.php';
-require 'functions.php';
+require("src/Core/Database.php");
+require("src/Core/AbstractModel.php");
+require("src/Model/SubscriberModel.php");
+
 
 $filename = $argv[1];
-$i=0;
+$i = 0;
 
 
 /**
@@ -21,15 +25,15 @@ if (!file_exists($filename)) {
  */
 $file = fopen($filename, "r");
 
-
+$subscriberModel = new SubscriberModel();
 /**  s
  * On se connecte à la base de données avec PDO et on prépare la requête d'insertion
  */
-$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASSWORD);
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASSWORD);
+// $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+// $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstname, lastname, email, created) VALUES (?,?,?,?)');
+// $pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstname, lastname, email, created) VALUES (?,?,?,?)');
 
 /**
  * Ensuite on va lire chaque ligne du fichier CSV avec la fonction fgetcsv()
@@ -44,9 +48,9 @@ while ($row = fgetcsv($file)) {
      */
     $firstname = $row[0];
     $lastname = $row[1];
-    $email=$row[2];
-    $created=new DateTime();
-    $newDate=$created->format('Y-m-d H-i-s');
+    $email = $row[2];
+    $created = new DateTime();
+    $newDate = $created->format('Y-m-d H-i-s');
 
 
 
@@ -56,19 +60,17 @@ while ($row = fgetcsv($file)) {
      * - on remplace la virgule par un point
      * - on convertit la chaîne de caractères en nombre
      */
-    $firstname =ucwords(strtolower($firstname), " -");
-    $lastname =ucwords(strtolower($lastname), " -");
-    $email =strtolower($email);
-    $email=str_replace(" ","", $email);
+    $firstname = ucwords(strtolower($firstname), " -");
+    $lastname = ucwords(strtolower($lastname), " -");
+    $email = strtolower($email);
+    $email = str_replace(" ", "", $email);
 
-    if(mailExists($email)==false){
-   $pdoStatement->execute([$firstname, $lastname, $email, $newDate]);
-   $i+=1;
-     }
-     else{
+    if ($subscriberModel->mailExists($email) == false) {
+        $subscriberModel->addSubscriber($email, $firstname, $lastname);
+        $i += 1;
+    } else {
         echo "Cette adresse $email existe déjà.\n";
-
-     }
+    }
 
 
     /**
@@ -76,9 +78,5 @@ while ($row = fgetcsv($file)) {
      */
 }
 
-echo $i." emails insérés dans la base de données .\n";
+echo $i . " emails insérés dans la base de données .\n";
 echo 'Import terminé!';
-
-
-
-?>

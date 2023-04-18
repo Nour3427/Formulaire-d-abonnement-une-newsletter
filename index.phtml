@@ -61,8 +61,8 @@
                     <select name="origine" id="origine">
                         <option value="" hidden>--Choisir--</option>
                         <?php foreach ($origines as $origine) : ?>
-                            <option value="<?= $origine['id']; ?>" <?php if (isset($_POST['origine']) && $_POST['origine'] == $origine['id']) {
-        echo "selected";} ?>> <?= $origine['origine_label']; ?></option>
+                            <option value="<?= $origine->getId(); ?>" <?php if (isset($_POST['origine']) && $_POST['origine'] == $origine->getId()) {
+        echo "selected";} ?>> <?= $origine->getOrigineLabel(); ?></option>
                         <?php endforeach; ?>                        
                     </select>
                     <?php if (isset($errors['origine'])) : ?>
@@ -73,10 +73,10 @@
                     <label for="checkbox" >Quels sont vos centres d'intérêt?</label><br><br>
                     
                     <?php foreach ($interests as $interest) : ?>
-                <input type="checkbox" id="interest-<?= $interest['id'];?>" name="interest[]" value="<?= $interest['id'];?> "  <?php if (isset($_POST['interest']) && in_array($interest['id'], $_POST['interest'])) {
+                <input type="checkbox" id="interest-<?= $interest->getId();?>" name="interest[]" value="<?= $interest->getId();?> "  <?php if (isset($_POST['interest']) && in_array($interest->getId(), $_POST['interest'])) {
     echo "checked";
   } ?>>
-                <label for="interest-<?= $interest['id'];?>"><?= $interest['interest_label']; ?></label><br>
+                <label for="interest-<?= $interest->getId();?>"><?= $interest->getInterestLabel(); ?></label><br>
                 <?php endforeach;?>
                 
                 <?php if (isset($errors['interest'])) : ?>
